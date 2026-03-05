@@ -193,7 +193,7 @@ export default function App() {
               </div>
 
               <p className="text-pink-700/70 text-sm mb-8 leading-relaxed">
-                Just a little more... A small gift for my favorite person ❤️
+                A small gift for my dear anjali 🍫🍫❤️🍫🍫
               </p>
 
               <div className="flex justify-center gap-2 mb-8">
