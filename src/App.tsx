@@ -341,8 +341,8 @@ export default function App() {
                   <Camera size={24} />
                 </div>
                 <div>
-                  <h2 className="font-display text-3xl text-pink-900">Our Beautiful Memories</h2>
-                  <p className="text-pink-400 text-sm font-medium">Every moment with you is a treasure</p>
+                  <h2 className="font-display text-3xl text-pink-900">My beautifull ....💝</h2>
+                  <p className="text-pink-400 text-sm font-medium">Shivam 💖 you</p>
                 </div>
               </div>
 
