@@ -285,9 +285,7 @@ export default function App() {
             </button>
             <audio 
               ref={audioRef}
-              src="/audio/music 1.mp3"
-              preload="auto"
-              playsInline
+              src="/audio/musi.mp3"
               loop 
             />
 
