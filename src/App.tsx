@@ -21,8 +21,6 @@ const MEMORIES: Memory[] = [
 
 export default function App() {
   const [phase, setPhase] = useState<'loading' | 'countdown' | 'celebration'>('loading');
-  const [isMuted, setIsMuted] = useState(true); // Start muted to allow autoplay
-  const [audioLoaded, setAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   // Countdown state
@@ -43,18 +41,10 @@ export default function App() {
     }
   }, [phase]);
 
-  // Load audio and set up event listeners
+  // Load audio
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.load(); // Force load the audio
-      
-      audioRef.current.addEventListener('canplaythrough', () => {
-        setAudioLoaded(true);
-      });
-      
-      audioRef.current.addEventListener('error', (e) => {
-        console.log("Audio loading error:", e);
-      });
+      audioRef.current.load();
     }
   }, []);
 
@@ -83,14 +73,9 @@ export default function App() {
 
   const handleStartCelebration = () => {
     setPhase('celebration');
-    // Play audio with user interaction
-    if (audioRef.current && audioLoaded) {
-      audioRef.current.play()
-        .then(() => {
-          console.log("Audio playing successfully");
-          setIsMuted(false); // Unmute after successful play
-        })
-        .catch(e => console.log("Play failed:", e));
+    // Play audio on button click
+    if (audioRef.current) {
+      audioRef.current.play().catch(e => console.log("Play failed:", e));
     }
     confetti({
       particleCount: 150,
@@ -100,33 +85,15 @@ export default function App() {
     });
   };
 
-  const toggleMute = () => {
-    if (audioRef.current) {
-      if (audioRef.current.paused) {
-        // If audio is paused, play it first
-        audioRef.current.play()
-          .then(() => {
-            audioRef.current.muted = !audioRef.current.muted;
-            setIsMuted(audioRef.current.muted);
-          })
-          .catch(e => console.log("Play failed:", e));
-      } else {
-        // If audio is playing, just toggle mute
-        audioRef.current.muted = !audioRef.current.muted;
-        setIsMuted(audioRef.current.muted);
-      }
-    }
-  };
-
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
-      {/* Audio element with preload */}
+      {/* Audio element - no controls, auto plays on button click */}
       <audio 
         ref={audioRef}
         preload="auto"
-        muted={isMuted}
+        loop
       >
-        <source src="/audio/music 1.mp3" type="audio/mpeg" />
+        <source src="/musi.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
 
@@ -253,9 +220,6 @@ export default function App() {
                     <span className="text-pink-400 text-xs italic">
                       Waiting for the clock to strike midnight...
                     </span>
-                    <span className="text-pink-300 text-[10px] animate-pulse">
-                      Tap anywhere to prepare the music 🎵
-                    </span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -298,13 +262,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             className="relative pb-20"
           >
-            {/* Audio Control */}
-            <button 
-              onClick={toggleMute}
-              className="fixed top-6 right-6 z-50 w-12 h-12 rounded-full glass flex items-center justify-center text-pink-600 shadow-lg hover:scale-110 transition-transform"
-            >
-              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} className="animate-pulse" />}
-            </button>
+            {/* Audio Control - REMOVED */}
 
             {/* Hero Section */}
             <section className="h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden bg-gradient-to-b from-pink-100 to-white">
