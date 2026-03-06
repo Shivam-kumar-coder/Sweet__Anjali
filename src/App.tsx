@@ -384,20 +384,20 @@ export default function App() {
                   </div>
                 </div>
 
-                <h2 className="font-display text-3xl md:text-4xl text-center text-pink-900 mb-10">A Special Message For My sweet Anjali 🎂</h2>
+                <h2 className="font-display text-3xl md:text-4xl text-center text-pink-900 mb-10">💕 A Special Message For My sweet Anjali 💕</h2>
                 
                 <div className="font-serif text-lg md:text-xl text-pink-800/80 leading-relaxed space-y-6 text-center">
                   <p>
-                    My dearest Anjali, on this special day, I want you to know how truly grateful I am to have you in my life. 
-                    Your laughter is the sweetest melody, and your smile is the brightest light in my world.
+                    Log kehte hain ki har kisi ki kismat mein ek farishta hota hai...
+                    Mujhe lagta hai meri kismat ka farishta tum ho Anjali ✨
                   </p>
                   <p>
-                    You are the most beautiful soul I've ever known, and every moment spent with you is a gift I cherish. 
-                    Watching you shine and being by your side is my greatest happiness.
+                    Tumhari hasi mein wo jaadu hai jo mere bure se bure din ko haseen bana de  
+                    Aur tumhari baaton mein wo sukoon... jo duniya ki kisi bheed mein nahi milta...
                   </p>
                   <p>
-                    Today, we celebrate you — your kindness, your grace, and the incredible woman you are. 
-                    I hope this year brings you as much joy as you bring to everyone around you.
+                    Main waada toh nahi karta ki tumhare raste ke har kaante hata dunga
+                    Par waada hai... un kaanton pe hum hamesha saath chalenge. ❤️.
                   </p>
                   <p className="pt-6 font-bold text-pink-600 text-2xl italic">
                     Happy Birthday, Anjali! I love you more than words can say.
