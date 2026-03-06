@@ -21,7 +21,8 @@ const MEMORIES: Memory[] = [
 
 export default function App() {
   const [phase, setPhase] = useState<'loading' | 'countdown' | 'celebration'>('loading');
-  const [isMuted, setIsMuted] = useState(false); // Default to unmuted for autoplay attempt
+  const [isMuted, setIsMuted] = useState(true); // Start muted to allow autoplay
+  const [audioLoaded, setAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   // Countdown state
@@ -42,22 +43,20 @@ export default function App() {
     }
   }, [phase]);
 
-  // Handle autoplay on first interaction
+  // Load audio and set up event listeners
   useEffect(() => {
-    const handleFirstInteraction = () => {
-      if (audioRef.current && !isMuted) {
-        audioRef.current.play().catch(e => console.log("Autoplay blocked", e));
-      }
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-    };
-    window.addEventListener('click', handleFirstInteraction);
-    window.addEventListener('touchstart', handleFirstInteraction);
-    return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-    };
-  }, [isMuted]);
+    if (audioRef.current) {
+      audioRef.current.load(); // Force load the audio
+      
+      audioRef.current.addEventListener('canplaythrough', () => {
+        setAudioLoaded(true);
+      });
+      
+      audioRef.current.addEventListener('error', (e) => {
+        console.log("Audio loading error:", e);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -84,8 +83,14 @@ export default function App() {
 
   const handleStartCelebration = () => {
     setPhase('celebration');
-    if (audioRef.current) {
-      audioRef.current.play().catch(e => console.log("Play failed", e));
+    // Play audio with user interaction
+    if (audioRef.current && audioLoaded) {
+      audioRef.current.play()
+        .then(() => {
+          console.log("Audio playing successfully");
+          setIsMuted(false); // Unmute after successful play
+        })
+        .catch(e => console.log("Play failed:", e));
     }
     confetti({
       particleCount: 150,
@@ -96,18 +101,35 @@ export default function App() {
   };
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
     if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+      if (audioRef.current.paused) {
+        // If audio is paused, play it first
+        audioRef.current.play()
+          .then(() => {
+            audioRef.current.muted = !audioRef.current.muted;
+            setIsMuted(audioRef.current.muted);
+          })
+          .catch(e => console.log("Play failed:", e));
       } else {
-        audioRef.current.pause();
+        // If audio is playing, just toggle mute
+        audioRef.current.muted = !audioRef.current.muted;
+        setIsMuted(audioRef.current.muted);
       }
     }
   };
 
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
+      {/* Audio element with preload */}
+      <audio 
+        ref={audioRef}
+        preload="auto"
+        muted={isMuted}
+      >
+        <source src="/audio/music 1.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
       <AnimatePresence mode="wait">
         {phase === 'loading' && (
           <motion.div
@@ -283,11 +305,6 @@ export default function App() {
             >
               {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} className="animate-pulse" />}
             </button>
-            <audio 
-              ref={audioRef}
-              src="/musi.mp3"
-              loop 
-            />
 
             {/* Hero Section */}
             <section className="h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden bg-gradient-to-b from-pink-100 to-white">
