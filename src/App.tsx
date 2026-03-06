@@ -32,7 +32,7 @@ export default function App() {
     totalSeconds: 1 // Initial non-zero to prevent immediate button show
   });
 
-  const targetDate = new Date('2026-03-06T00:00:00');
+  const targetDate = new Date('2026-03-07T00:00:00');
 
   useEffect(() => {
     if (phase === 'loading') {
