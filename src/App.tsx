@@ -11,12 +11,12 @@ interface Memory {
 }
 
 const MEMORIES: Memory[] = [
-  { id: 1, url: 'https://picsum.photos/seed/love1/600/800', caption: 'The moment it all began' },
-  { id: 2, url: 'https://picsum.photos/seed/love2/600/800', caption: 'Our favorite little getaway' },
-  { id: 3, url: 'https://picsum.photos/seed/love3/600/800', caption: 'That perfect summer evening' },
-  { id: 4, url: 'https://picsum.photos/seed/love4/600/800', caption: 'Shared laughs and endless talks' },
-  { id: 5, url: 'https://picsum.photos/seed/love5/600/800', caption: 'Exploring the world together' },
-  { id: 6, url: 'https://picsum.photos/seed/love6/600/800', caption: 'Just us, being us' },
+  { id: 1, url: '/images/i.jpeg', caption: 'payari ❤ anjali' },
+  { id: 2, url: '/images/m.jpeg', caption: 'Anjali, tumhari ek smile hi meri puri duniya hai. ✨' },
+  { id: 3, url: '/images/a.jpeg', caption: 'Bas tum saath rehna, baaki sab sambhal lunga. 💖' },
+  { id: 4, url: '/images/g.jpeg', caption: 'Anjali, tum meri sabse khoobsurat dua ho. 🌸' },
+  { id: 5, url: '/images/e.jpeg', caption: 'Meri duniya ki sabse pyari rounak—Anjali! ❤️' },
+  { id: 6, url: '/images/s.jpeg', caption: 'Happy Birthday to the girl who owns my heart! 👑' },
 ];
 
 export default function App() {
@@ -33,7 +33,7 @@ export default function App() {
     totalSeconds: 1 // Initial non-zero to prevent immediate button show
   });
 
-  const targetDate = new Date('2026-03-07T00:00:00');
+  const targetDate = new Date('2026-03-06T00:00:00');
 
   useEffect(() => {
     if (phase === 'loading') {
@@ -301,7 +301,7 @@ export default function App() {
                   Today is the day
                 </div>
                 <h1 className="font-display text-4xl md:text-7xl text-pink-800 mb-6 leading-tight">
-                  Happy Birthday, <br />
+                  Happy Birthday, Anjali! I love you! ❤️, <br />
                   <span className="italic text-pink-600">My sweet Anjali! 🥳🥳</span>
                 </h1>
                 <p className="font-serif text-xl text-pink-700/70 max-w-lg mx-auto mb-10 leading-relaxed">
