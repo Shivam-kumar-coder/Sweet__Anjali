@@ -285,7 +285,7 @@ export default function App() {
             </button>
             <audio 
               ref={audioRef}
-              src="/audio/musi.mp3"
+              src="/musi.mp3"
               loop 
             />
 
